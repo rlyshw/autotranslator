@@ -5,14 +5,11 @@ def translate(word, lang, api):
         gs = goslate.Goslate()
         return gs.translate(str(word), str(lang))
     
-def main(argv):
+def main():
     inputfile = 'in.csv'
     outputfile = 'out.csv'
-    lang = 'de'
+    lang = 'zh'
     api = 'goog'
-    
-    print 'Input file is ', inputfile
-    print 'Output file is ', outputfile
     try:
         with open(inputfile, 'rb') as infile:
             inreader = csv.reader(infile)
@@ -21,9 +18,10 @@ def main(argv):
                                       delimiter=',')
                 for row in inreader:
                     outwords.writerow([row[0],
-                                       translate(row[0],lang, api)])
+                            translate(row[0],lang, api).encode('utf-8')])
     except IOError as e:
         print 'cannot open', inputfile
         print e.strerror
+
 if __name__ == "__main__":
-   main(sys.argv[1:])
+   main()
