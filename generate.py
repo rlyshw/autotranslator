@@ -1,4 +1,4 @@
-import sys, argparse, csv, goslate, Translate
+import sys, argparse, csv, goslate
 
 def translate(word, lang, api):
     if api == "goog":
