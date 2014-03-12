@@ -8,7 +8,7 @@ def translate(word, lang, api):
 def main():
     inputfile = 'in.csv'
     outputfile = 'out.csv'
-    lang = 'zh'
+    langs = ['zh','de']
     api = 'goog'
     try:
         with open(inputfile, 'rb') as infile:
@@ -17,8 +17,9 @@ def main():
                 outwords = csv.writer(outfile, quoting=csv.QUOTE_MINIMAL,
                                       delimiter=',')
                 for row in inreader:
-                    outwords.writerow([row[0],
-                            translate(row[0],lang, api).encode('utf-8')])
+                    for lang in langs:
+                        row.append(translate(row[0],lang, api).encode('utf-8'))
+                    outwords.writerow(row)
     except IOError as e:
         print 'cannot open', inputfile
         print e.strerror
