@@ -1,8 +1,8 @@
 import sys, argparse, csv, goslate
 
 def translate(word, target, detect, source, api):
+    gs = goslate.Goslate()
     if api == "goog":
-        gs = goslate.Goslate()
         if detect:
             return gs.translate(str(word), str(target), gs.detect(source))
         elif not detect:
@@ -17,8 +17,7 @@ def main():
         with open(inputfile, 'rb') as infile:
             inputreader = csv.reader(infile)
             with open(outputfile, 'wb+') as outfile:
-                outwords = csv.writer(outfile, quoting=csv.QUOTE_MINIMAL,
-                                      delimiter=',')
+                outwords = csv.writer(outfile, quoting=csv.QUOTE_MINIMAL)
                 for row in inputreader:
                     for lang in langs:
                         row.append(translate(row[0], lang, True,
