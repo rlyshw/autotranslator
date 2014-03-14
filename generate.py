@@ -1,8 +1,8 @@
 import sys, argparse, csv, goslate
 
 def translate(word, target, source, api):
-    gs = goslate.Goslate()
     if api == "goog":
+        gs = goslate.Goslate()
         return gs.translate(str(word), str(target), source)
 
 def main():
@@ -21,4 +21,4 @@ def main():
                 outwords.writerow(row)
 
 if __name__ == "__main__":
-   main()
+    main()
